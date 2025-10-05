@@ -1,94 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="https://use.typekit.net/xty3lbh.css">
-  <title>Rolling Lens</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background-color: #000000;
-      color: white;
-        font-family: "canada-type-gibson", sans-serif;
-        font-weight: 700;
-        font-style: normal;
-      overflow-x: hidden;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://use.typekit.net/xty3lbh.css">
+<title>Rolling Lens</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: white;
+    font-family: "canada-type-gibson", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+    overflow-x: hidden;
+  }
 
-    .lens-container {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotate(0deg);
-      width: 550px;
-      height: 550px;
-      border-radius: 50%;
-      background: black;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-      z-index: 10;
-      transition: transform 1s ease, left 1s ease;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+  /* LENS */
+.lens-container {
+  --lens-size: 30vw; /* responsive base size */
+  width: var(--lens-size);
+  height: var(--lens-size);
+  max-width: 550px;
+  max-height: 550px;
+  min-width: 200px;
+  min-height: 200px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  border-radius: 50%;
+  background: black;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2); /* glow retained */
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 1s ease, left 1s ease;
+}
 
-    .circle-icon {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background-size: cover;
-      background-position: center;
-      position: absolute;
-      top: 41%;
-      left: 41%;
-      transform-origin: center;
-      opacity: 0.9;
-      transition: transform 0.5s ease, opacity 0.5s ease;
-    }
+.circle-icon {
+  width: 15%;  /* relative to lens size */
+  height: 15%;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: 0 0; /* rotate around the lens center */
+  opacity: 0.9;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
 
-    /* Icons evenly spaced around the lens */
-    .icon1 { transform: rotate(0deg)   translateY(-200px) rotate(0deg); background-color: rgb(190, 2, 2); }
-    .icon2 { transform: rotate(60deg)  translateY(-200px) rotate(-60deg); background-color: rgb(255, 166, 0); }
-    .icon3 { transform: rotate(120deg) translateY(-200px) rotate(-120deg); background-color: rgb(212, 255, 0); }
-    .icon4 { transform: rotate(180deg) translateY(-200px) rotate(-180deg); background-color: rgb(4, 139, 4); }
-    .icon5 { transform: rotate(240deg) translateY(-200px) rotate(-240deg); background-color: rgb(0, 170, 255); }
-    .icon6 { transform: rotate(300deg) translateY(-200px) rotate(-300deg); background-color: rgb(220, 3, 176); }
+/* Icons evenly spaced around the lens */
+.icon1 { transform: rotate(0deg)   translate(200%, -45%); background-color: rgb(190, 2, 2); }
+.icon2 { transform: rotate(60deg)  translate(200%, -45%); background-color: rgb(255, 166, 0); }
+.icon3 { transform: rotate(120deg) translate(200%, -45%); background-color: rgb(212, 255, 0); }
+.icon4 { transform: rotate(180deg) translate(200%, -45%); background-color: rgb(4, 139, 4); }
+.icon5 { transform: rotate(240deg) translate(200%, -45%); background-color: rgb(0, 170, 255); }
+.icon6 { transform: rotate(300deg) translate(200%, -45%); background-color: rgb(220, 3, 176); }
 
     .logo {
-    position: absolute;
-    top: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.5rem;
+      color: #ffffff;
+      pointer-events: none;
+      user-select: none;
+    }
+
+
+  /* CONTENT */
+  .content-section {
+    height: 100vh;
+    background-color: #000;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10vw;
+    align-items: center;
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+
+  .blurb {
+    width: 50%;
+    max-width: 600px;
+    margin-left: auto;
+  }
+
+  .blurb img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
+
+  .blurb img {
+    width: 40%;       /* Makes the image span the full width of the blurb */
+    height: auto;      /* Maintains the aspect ratio */
+    display: block;    /* Removes any extra spacing below the image */
+    border-radius: 8px; /* Optional: rounded corners */
+    object-fit: cover;  /* Ensures the image covers the container without distortion */
+    }
+
+  .thanks {
+    padding-top: 10em;
+  }
+
+  .spacer { height: 100vh; }
+
+  @media (max-width: 900px) {
+  .lens-container {
+    position: absolute; /* scrolls with content */
+    width: 50vw;
+    height: 50vw;
+    max-width: none;
+    top: 5rem;
     left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1.5rem;
-    color: #ffffff;
-    pointer-events: none; /* so it doesn't interfere with clicks */
-    user-select: none; /* prevents text selection */
-    }
+    transform: translateX(-50%) rotate(0deg);
+  }
+  .content-section {
+    margin-right: 5vw;
+    justify-content: center; /* center horizontally */
+    align-items: center;     /* center vertically */
+    padding: 2rem 1rem;      /* add some breathing room */
+    text-align: left;      /* center text for smaller screens */
+    min-height: 100vh;       /* ensure each section fills screen */
+  }
+  .blurb {
+    width: 90%;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 
-
-    .content-section {
-      height: 100vh;
-      background-color: #000000;
-      display: flex;
-      justify-content: flex-end;
-      margin-right: 12em;
-      align-items: center;
-      padding: 2rem;
-      box-sizing: border-box;
-    }
-
-    .blurb {
-      width: 50%;
-      max-width: 600px;
-      margin-left: auto;
-    }
-
-    .spacer {
-      height: 100vh;
-    }
-  </style>
+@media (max-width: 600px) {
+  .lens-container {
+    width: 60vw;
+    height: 60vw;
+    top: 3rem;
+  }
+  .content-section {
+    margin-right: 3vw;
+  }
+}
+</style>
 </head>
 <body>
 
@@ -103,14 +165,23 @@
     <div class="logo">G's lens</div>
   </div>
 
-  <!-- SPACER TO KEEP LENS CENTERED INITIALLY -->
   <div class="spacer" id="top-spacer"></div>
 
   <!-- SCROLLABLE SECTIONS -->
   <div class="content-section" data-step="1">
     <div class="blurb">
-      <h2>Red Icon</h2>
-      <p>This is the first part of the story through the red lens — bold, raw, and emotional.</p>
+      <img src="IMG_3510.jpg" alt="image of Gunjan">
+      <h2>Hi, I'm Gunjan!</h2>
+      <p>Ever since I can remember, I’ve been turning the world’s leftovers into my creative playground. Transforming trash into treasure—literally. 
+        As a kid I would collect little things that people might overlook—scraps of paper, broken buttons, old CDs, even stray paper cups from restaurants and 
+        would turn these tiny fragments into cards for my mum, collages, or whatever creation my imagination demanded. My parents would laugh and say I’d never 
+        let anything go to waste, but really, it was my first lesson in seeing potential where others didn’t—and in making something out of nothing.
+      </p>
+      <p>In high school I taught myself how to use the Adobe Creative Suite. And that was it. That curiosity pushed me pack my bags and move across the globe
+        to pursue my dream and study digital desgin at UniMelb. These days, I often describe myself as “diagnosed with a constant need for a side gig.” 
+        If I’m not deep in student media at uni, you’ll probably find me volunteering and designing for conferences (see you at UX Camp next week?). If not 
+        that, I’m either sweating it out at the gym or being a full-on foodie, hunting down new spots around the city.</p>
+        <p>I’m not sharing all this for no reason — I want you to get a sense of <i>who I am</i> and how passionate I am about this role. So, here are five reasons I think you should hire me:</p>
     </div>
   </div>
 
@@ -130,7 +201,7 @@
 
   <div class="content-section" data-step="4">
     <div class="blurb">
-      <h2>Because design is only good if everyone can use it</h2>
+     <h2>Because design is only good if everyone can use it</h2>
       <p>I care deeply about inclusive design - creating experiences that welcome everyone in. My best work happens when everyone is invited to the experience.</p>
     </div>
   </div>
@@ -146,26 +217,30 @@
     <div class="blurb">
       <h2>Because I like making things that matter</h2>
       <p>I make things with my heart, projects that mean something - often about people and the planet. My favourite projects often have something to say.</p>
+      <p class="thanks">Thanks for reading my story and considering my application!</p>
     </div>
   </div>
+
+
 
   <script>
     const lens = document.getElementById('lens');
     const sections = document.querySelectorAll('.content-section');
     const topSpacer = document.getElementById('top-spacer');
-
-    const iconAngles = [0, 72, 144, 216, 288, 360];
+    const iconAngles = [22, 85, 144, 210, 268, 360];
     let lastStep = 0;
 
-    // Function to move lens left with rotation
     function rotateLensToStep(step) {
-      const angle = iconAngles[step - 1] || 0;
+      const angle = iconAngles[step-1] || 0;
+
+      if (window.innerWidth <= 900) return; // small screens: no fixed rotation
+
+      // default left position for desktop
       lens.style.left = '150px';
       lens.style.transform = `translateY(-50%) rotate(${angle}deg)`;
     }
 
-    // Observer for scroll sections
-    const sectionObserver = new IntersectionObserver((entries) => {
+    const sectionObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const step = parseInt(entry.target.dataset.step);
@@ -175,26 +250,24 @@
           }
         }
       });
-    }, {
-      threshold: 0.6
-    });
+    }, { threshold: 0.6 });
 
-    // Observer for top spacer to return to center
-    const topObserver = new IntersectionObserver((entries) => {
+    const topObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && window.innerWidth > 900) {
           lens.style.left = '50%';
           lens.style.transform = 'translate(-50%, -50%) rotate(0deg)';
           lastStep = 0;
         }
       });
-    }, {
-      threshold: 0.8
-    });
+    }, { threshold: 0.8 });
 
-    // Attach observers
     sections.forEach(section => sectionObserver.observe(section));
     topObserver.observe(topSpacer);
+
+    window.addEventListener('resize', () => {
+      rotateLensToStep(lastStep || 1);
+    });
   </script>
 
 </body>
