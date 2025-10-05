@@ -19,7 +19,7 @@
 
   /* LENS */
 .lens-container {
-  --lens-size: 30vw; /* responsive base size */
+  --lens-size: 30vw; 
   width: var(--lens-size);
   height: var(--lens-size);
   max-width: 550px;
@@ -32,7 +32,7 @@
   transform: translate(-50%, -50%) rotate(0deg);
   border-radius: 50%;
   background: black;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2); /* glow retained */
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2); 
   z-index: 10;
   display: flex;
   justify-content: center;
@@ -41,7 +41,7 @@
 }
 
 .circle-icon {
-  width: 15%;  /* relative to lens size */
+  width: 15%;  
   height: 15%;
   border-radius: 50%;
   background-size: cover;
@@ -49,7 +49,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform-origin: 0 0; /* rotate around the lens center */
+  transform-origin: 0 0; 
   opacity: 0.9;
   transition: transform 0.5s ease, opacity 0.5s ease;
 }
@@ -101,11 +101,11 @@
   }
 
   .blurb img {
-    width: 40%;       /* Makes the image span the full width of the blurb */
-    height: auto;      /* Maintains the aspect ratio */
-    display: block;    /* Removes any extra spacing below the image */
-    border-radius: 8px; /* Optional: rounded corners */
-    object-fit: cover;  /* Ensures the image covers the container without distortion */
+    width: 40%;       
+    height: auto;      
+    display: block;   
+    border-radius: 8px; 
+    object-fit: cover;  
     }
 
   .thanks {
@@ -116,7 +116,7 @@
 
   @media (max-width: 900px) {
   .lens-container {
-    position: absolute; /* scrolls with content */
+    position: absolute; 
     width: 50vw;
     height: 50vw;
     max-width: none;
@@ -126,11 +126,11 @@
   }
   .content-section {
     margin-right: 5vw;
-    justify-content: center; /* center horizontally */
-    align-items: center;     /* center vertically */
-    padding: 2rem 1rem;      /* add some breathing room */
-    text-align: left;      /* center text for smaller screens */
-    min-height: 100vh;       /* ensure each section fills screen */
+    justify-content: center; 
+    align-items: center;     
+    padding: 2rem 1rem;      
+    text-align: left;      
+    min-height: 100vh;       
   }
   .blurb {
     width: 90%;
@@ -233,7 +233,7 @@
     function rotateLensToStep(step) {
       const angle = iconAngles[step-1] || 0;
 
-      if (window.innerWidth <= 900) return; // small screens: no fixed rotation
+      if (window.innerWidth <= 900) return; 
 
       // default left position for desktop
       lens.style.left = '150px';
